@@ -3,9 +3,7 @@
 ![JPA](https://img.shields.io/badge/Jpa-2.7.6-green.svg)
 ![Hibernate](https://img.shields.io/badge/Hibernate-5.6.14-orange.svg)
 # HunnyShop-Server
-```
 회원, 상품, 주문 도메인을 가진 HunnyShop Site.
-```
 # Branch
 ```
 master: 상용 브랜치
