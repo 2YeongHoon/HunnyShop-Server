@@ -1,8 +1,8 @@
-package jpabook.member.repository;
+package jpabook.repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import jpabook.member.entity.Member;
+import jpabook.domain.Member;
 import org.springframework.stereotype.Repository;
 
 @Repository
