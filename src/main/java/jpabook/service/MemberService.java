@@ -26,7 +26,7 @@ public class MemberService {
     private void validateDuplicateMember(Member member) throws Exception{
         List<Member> findMembers = memberRepository.findByName(member.getUserName());
         if (!findMembers.isEmpty()){
-            throw new IllegalAccessException("이미존재하는 아이디입니다.");
+            throw new IllegalStateException("이미존재하는 아이디입니다.");
         }
     }
 
