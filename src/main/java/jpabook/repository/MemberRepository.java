@@ -2,15 +2,15 @@ package jpabook.repository;
 
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import jpabook.domain.Member;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 @Repository
+@RequiredArgsConstructor
 public class MemberRepository {
 
-    @PersistenceContext
-    private EntityManager entityManager;
+    private final EntityManager entityManager;
 
     public void save(Member member){
         entityManager.persist(member);
@@ -20,7 +20,7 @@ public class MemberRepository {
         return entityManager.find(Member.class, id);
     }
 
-    public List<Member> findAll(Long id){
+    public List<Member> findAll(){
         return entityManager.createQuery("select m from Member m", Member.class)
             .getResultList();
     }
