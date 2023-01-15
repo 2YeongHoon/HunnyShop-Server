@@ -5,6 +5,7 @@ import jpabook.domain.Member;
 import jpabook.domain.Order;
 import jpabook.domain.OrderItem;
 import jpabook.domain.item.Item;
+import jpabook.enums.DeliveryStatus;
 import jpabook.repository.ItemRepository;
 import jpabook.repository.MemberRepository;
 import jpabook.repository.OrderRepository;
@@ -33,6 +34,7 @@ public class OrderService {
     // 배송정보 생성
     Delivery delivery = new Delivery();
     delivery.setAddress(member.getAddress());
+    delivery.setDeliveryStatus(DeliveryStatus.READY);
 
     // 주문상품 생성
     OrderItem orderItem = OrderItem.createOrderItem(item, item.getPrice(), count);
