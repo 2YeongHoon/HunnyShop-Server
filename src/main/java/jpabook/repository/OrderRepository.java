@@ -16,6 +16,6 @@ public class OrderRepository {
   }
 
   public Order findOne(Long id){
-    return entityManager.find(Order.class, 1);
+    return entityManager.find(Order.class, id);
   }
 }
