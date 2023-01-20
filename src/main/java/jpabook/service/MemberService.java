@@ -17,13 +17,14 @@ public class MemberService {
     /**
      * 회원 등록
      */
-    public Long join(Member member) throws Exception {
+    @Transactional
+    public Long join(Member member) {
         validateDuplicateMember(member);
         memberRepository.save(member);
         return member.getId();
     }
 
-    private void validateDuplicateMember(Member member) throws Exception{
+    private void validateDuplicateMember(Member member) {
         List<Member> findMembers = memberRepository.findByName(member.getUserName());
         if (!findMembers.isEmpty()){
             throw new IllegalStateException("이미존재하는 아이디입니다.");
