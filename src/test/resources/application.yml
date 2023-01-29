@@ -1,0 +1,6 @@
+# 메모리DB 실행모드
+spring:
+logging:
+  level:
+    org.hibernate.sql: debug
+    org.hibernate.type: trace
