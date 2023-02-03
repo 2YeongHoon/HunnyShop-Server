@@ -14,7 +14,7 @@
         <option value="">회원선택</option>
         <option th:each="member : ${members}"
                 th:value="${member.id}"
-                th:text="${member.name}" />
+                th:text="${member.userName}" />
       </select>
     </div>
 
