@@ -30,8 +30,10 @@ public class Delivery {
         fetch = FetchType.LAZY
     )
     private Order order;
+
     @Embedded
     private Address address;
+
     @Enumerated(EnumType.STRING)
     private DeliveryStatus status;
 
