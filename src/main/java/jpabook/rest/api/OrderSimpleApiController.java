@@ -1,4 +1,4 @@
-package jpabook.restapi;
+package jpabook.rest.api;
 
 import static java.util.stream.Collectors.toList;
 
@@ -100,4 +100,5 @@ public class OrderSimpleApiController {
       address = order.getDelivery().getAddress();
     }
   }
+  
 }
