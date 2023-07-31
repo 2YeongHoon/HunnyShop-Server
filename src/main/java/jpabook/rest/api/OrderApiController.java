@@ -11,6 +11,8 @@ import jpabook.domain.OrderItem;
 import jpabook.enums.OrderStatus;
 import jpabook.repository.OrderRepository;
 import jpabook.repository.OrderSearch;
+import jpabook.repository.order.query.OrderQueryRepository;
+import jpabook.repository.order.query.dto.OrderQueryDto;
 import lombok.Data;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -41,6 +43,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class OrderApiController {
 
   private final OrderRepository orderRepository;
+  private final OrderQueryRepository orderQueryRepository;
 
   /**
    * V1. 엔티티 직접 노출
@@ -82,6 +85,16 @@ public class OrderApiController {
     return orders.stream()
         .map(o -> new OrderDto(o))
         .collect(Collectors.toList());
+  }
+
+  @GetMapping("/api/v4/orders")
+  public List<OrderQueryDto> ordersV4() {
+    return orderQueryRepository.findOrderQueryDtos();
+  }
+
+  @GetMapping("/api/v5/orders")
+  public List<OrderQueryDto> ordersV5() {
+    return orderQueryRepository.findAllByDto();
   }
 
   @Getter
