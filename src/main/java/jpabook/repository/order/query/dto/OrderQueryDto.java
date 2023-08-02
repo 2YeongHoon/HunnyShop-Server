@@ -5,8 +5,10 @@ import java.util.List;
 import jpabook.domain.Address;
 import jpabook.enums.OrderStatus;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
+@EqualsAndHashCode(of = "orderId")
 public class OrderQueryDto {
 
   private Long orderId;
@@ -24,6 +26,15 @@ public class OrderQueryDto {
     this.orderDate = orderDate;
     this.orderStatus = orderStatus;
     this.address = address;
+  }
+
+  public OrderQueryDto(Long orderId, String name, LocalDateTime orderDate, OrderStatus orderStatus, Address address, List<OrderItemQueryDto> orderItems) {
+    this.orderId = orderId;
+    this.name = name;
+    this.orderDate = orderDate;
+    this.orderStatus = orderStatus;
+    this.address = address;
+    this.orderItems = orderItems;
   }
 
 }

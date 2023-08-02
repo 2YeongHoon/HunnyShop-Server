@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import javax.persistence.EntityManager;
+import jpabook.repository.order.query.dto.OrderFlatDto;
 import jpabook.repository.order.query.dto.OrderItemQueryDto;
 import jpabook.repository.order.query.dto.OrderQueryDto;
 import lombok.RequiredArgsConstructor;
@@ -69,4 +70,14 @@ public class OrderQueryRepository {
     ).getResultList();
   }
 
+  public List<OrderFlatDto> findAllByDto_flat() {
+    return entityManager.createQuery(
+        "select new jpabook.repository.order.query.dto.OrderFlatDto(o.id, m.userName, o.orderDate, o.status, d.address, i.name, oi.orderPrice, oi.count)" +
+            " from Order o" +
+            " join Member m" +
+            " join Delivery d" +
+            " join OrderItem oi" +
+            " join oi.item i", OrderFlatDto.class
+    ).getResultList();
+  }
 }
