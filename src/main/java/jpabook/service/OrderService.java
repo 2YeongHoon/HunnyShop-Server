@@ -8,7 +8,7 @@ import jpabook.domain.OrderItem;
 import jpabook.domain.item.Item;
 import jpabook.enums.DeliveryStatus;
 import jpabook.repository.ItemRepository;
-import jpabook.repository.MemberRepository;
+import jpabook.repository.MemberRepositoryOld;
 import jpabook.repository.OrderRepository;
 import jpabook.repository.OrderSearch;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class OrderService {
 
-  private final MemberRepository memberRepository;
+  private final MemberRepositoryOld memberRepository;
   private final ItemRepository itemRepository;
   private final OrderRepository orderRepository;
 
@@ -59,6 +59,6 @@ public class OrderService {
   }
 
   public List<Order> findOrders(OrderSearch orderSearch) {
-    return orderRepository.findAllByString(orderSearch);
+    return orderRepository.findAll(orderSearch);
   }
 }
