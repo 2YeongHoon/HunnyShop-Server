@@ -1,9 +1,14 @@
 package jpabook.repository;
 
+import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import jpabook.domain.Order;
+import jpabook.domain.QMember;
+import jpabook.domain.QOrder;
+import jpabook.enums.OrderStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
@@ -65,6 +70,38 @@ public class OrderRepository {
     }
 
     return query.getResultList();
+  }
+
+  public List<Order> findAll(OrderSearch orderSearch){
+    JPAQueryFactory queryFactory = new JPAQueryFactory(entityManager);
+    QOrder order = QOrder.order;
+    QMember member = QMember.member;
+
+    return queryFactory
+        .select(order)
+        .from(order)
+        .join(order.member, member)
+        .where(
+            statsEq(orderSearch.getOrderStatus()),
+            nameLike(orderSearch.getMemberName()))
+        .limit(1000)
+        .fetch();
+  }
+
+  private BooleanExpression nameLike(String memberName){
+    if(!StringUtils.hasText(memberName)){
+      return null;
+    }
+
+    return QMember.member.userName.like(memberName);
+  }
+
+  private BooleanExpression statsEq(OrderStatus orderStatus){
+    if(orderStatus == null){
+      return null;
+    }
+
+    return QOrder.order.status.eq(orderStatus);
   }
 
   public List<Order> findAllWithMemberDelivery() {
